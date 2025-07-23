@@ -1,6 +1,6 @@
 -- Create database if not exists
-CREATE DATABASE IF NOT EXISTS sql10791432;
-USE sql10791432;
+CREATE DATABASE IF NOT EXISTS bolsadee_bolsa_estudos;
+USE bolsadee_bolsa_estudos;
 
 -- Applications table
 CREATE TABLE IF NOT EXISTS applications (
