@@ -1,10 +1,10 @@
 import mysql from "mysql2/promise"
 
 const dbConfig = {
-  host: process.env.DB_HOST || "sql10.freesqldatabase.com",
-  user: process.env.DB_USER || "sql10791432",
-  password: process.env.DB_PASSWORD || "9VKP6mHuiJ",
-  database: process.env.DB_NAME || "sql10791432",
+  host: process.env.DB_HOST || "http://cloud.novaweb.ao",
+  user: process.env.DB_USER || "bolsadae_admin",
+  password: process.env.DB_PASSWORD || "&2K^Tnf{+=jyI)Cq",
+  database: process.env.DB_NAME || "bolsadee_bolsa_estudos",
   port: Number.parseInt(process.env.DB_PORT || "3306"),
   waitForConnections: true,
   connectionLimit: 10,
