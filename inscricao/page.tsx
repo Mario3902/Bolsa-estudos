@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import type React, { ReactNode } from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -62,7 +62,7 @@ export default function InscricaoPage() {
       title: "Recém-Formados do Ensino Médio",
       description: "Para quem terminou o ensino médio e quer ingressar na universidade",
       requirements: "Média ≥ 18 valores • Certificado de conclusão",
-      icon: <GraduationCap className="h-6 w-6" />,
+      icon: <GraduationCap className="h-6 w-6" /> as React.ReactNode,
       color: "bg-emerald-500",
     },
     {
@@ -70,7 +70,7 @@ export default function InscricaoPage() {
       title: "Universitários em Curso",
       description: "Para estudantes já matriculados no ensino superior",
       requirements: "Média ≥ 18 valores • Declaração de matrícula",
-      icon: <BookOpen className="h-6 w-6" />,
+      icon: <BookOpen className="h-6 w-6" /> as React.ReactNode,
       color: "bg-green-500",
     },
     {
@@ -78,7 +78,7 @@ export default function InscricaoPage() {
       title: "Cursos Técnicos Superiores",
       description: "Para cursos técnicos e profissionalizantes",
       requirements: "Média ≥ 18 valores • Comprovativo de inscrição",
-      icon: <Target className="h-6 w-6" />,
+      icon: <Target className="h-6 w-6" /> as React.ReactNode,
       color: "bg-orange-500",
     },
     {
@@ -86,7 +86,7 @@ export default function InscricaoPage() {
       title: "Pós-Graduação e Mestrado",
       description: "Para estudantes de pós-graduação e mestrado",
       requirements: "Licenciatura concluída • Média ≥ 18 valores",
-      icon: <Award className="h-6 w-6" />,
+      icon: <Award className="h-6 w-6" /> as React.ReactNode,
       color: "bg-purple-500",
     },
   ]

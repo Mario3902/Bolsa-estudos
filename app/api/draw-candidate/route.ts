@@ -21,10 +21,10 @@ export async function POST(request: NextRequest) {
     `
     const params: any[] = []
 
-    if (categoria !== "todas") {
-      query += " AND a.categoria = ?"
-      params.push(categoria)
-    }
+    // if (categoria !== "todas") {
+    //   query += " AND a.categoria = ?"
+    //   params.push(categoria)
+    // }
 
     // Exclude those who already have active scholarships
     query += " AND s.id IS NULL"
