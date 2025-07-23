@@ -1,4 +1,4 @@
-import { getConnection, testConnection } from "../lib/database"
+import { testConnection, getConnection } from "../lib/database"
 
 async function runDatabaseTest() {
   console.log("🔄 Testing database connection...")
