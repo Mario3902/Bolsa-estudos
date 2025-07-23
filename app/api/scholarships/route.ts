@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getConnection } from "@/lib/database"
+import { executeQuery } from "@/lib/database"
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status") || ""
 
     const offset = (page - 1) * limit
-    const connection = getConnection()
 
     let whereClause = "WHERE 1=1"
     const params: any[] = []
@@ -20,7 +19,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get total count
-    const [countResult] = await connection.execute(
+    const countResult = await executeQuery(
       `
       SELECT COUNT(*) as total 
       FROM scholarships s
@@ -32,7 +31,7 @@ export async function GET(request: NextRequest) {
     const total = (countResult as any)[0].total
 
     // Get scholarships with application details
-    const [scholarships] = await connection.execute(
+    const scholarships = await executeQuery(
       `
       SELECT 
         s.*,
@@ -69,7 +68,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const connection = getConnection()
     const body = await request.json()
 
     const { application_id, amount, duration_months, start_date, end_date, notes } = body
@@ -82,7 +80,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if application exists and is approved
-    const [applications] = await connection.execute("SELECT id, status FROM applications WHERE id = ?", [
+    const applications = await executeQuery("SELECT id, status FROM applications WHERE id = ?", [
       application_id,
     ])
 
@@ -99,7 +97,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if already has active scholarship
-    const [existingScholarships] = await connection.execute(
+    const existingScholarships = await executeQuery(
       "SELECT id FROM scholarships WHERE application_id = ? AND status = 'ativo'",
       [application_id],
     )
@@ -109,7 +107,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create scholarship
-    const [result] = await connection.execute(
+    const result = await executeQuery(
       `INSERT INTO scholarships (application_id, amount, duration_months, start_date, end_date, notes)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [application_id, amount, duration_months, start_date, end_date, notes || ""],

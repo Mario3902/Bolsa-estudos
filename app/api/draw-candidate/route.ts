@@ -1,9 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { getConnection } from "@/lib/database"
+import { executeQuery } from "@/lib/database"
 
 export async function POST(request: NextRequest) {
   try {
-    const connection = getConnection()
     const body = await request.json()
     const { categoria, quantidade = 1 } = body
 
@@ -32,7 +31,7 @@ export async function POST(request: NextRequest) {
     query += " LIMIT ?"
     params.push(Number.parseInt(quantidade.toString()))
 
-    const [candidates] = await connection.execute(query, params)
+    const candidates = await executeQuery(query, params)
 
     if ((candidates as any[]).length === 0) {
       return NextResponse.json(
@@ -48,7 +47,7 @@ export async function POST(request: NextRequest) {
     const selectedCandidates = []
     for (const candidate of candidates as any[]) {
       try {
-        await connection.execute(
+        await executeQuery(
           `INSERT INTO scholarships (application_id, amount, duration_months, start_date, end_date, notes)
            VALUES (?, 50000, 12, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 12 MONTH), ?)`,
           [candidate.id, `Selecionado por sorteio em ${new Date().toLocaleDateString("pt-BR")}`],
